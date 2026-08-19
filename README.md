@@ -1,742 +1,397 @@
-Pingnest
-
-
-
-CHAT · CONNECT · NEST
-
-
-
-Pingnest is a real-time full-stack chat application built with the MERN stack and Socket.io. It supports live messaging, image sharing, online-presence indicators, and light/dark theming.
-
-
-
-\## ✨ Features
-
-
-
-\* 🔐 User signup and login
-
-\* 🔒 JWT-based authentication
-
-\* 🔑 Password hashing with bcryptjs
-
-\* 💬 Realtime one-to-one messaging
-
-\* ⚡ Realtime communication using Socket.IO
-
-\* 🟢 Online user status
-
-\* 🖼️ Image sharing in chat
-
-\* 👤 Profile picture upload
-
-\* ☁️ Cloudinary image storage
-
-\* 🎨 Multiple UI themes
-
-\* 📱 Responsive chat interface
-
-\* 🔔 Toast notifications
-
-\* 📋 Recent conversations move to the top
-
-\* 🛡️ Protected API routes
-
-\* 🍪 Cookie-based authentication
-
-
-
-\## 🛠️ Tech Stack
-
-
-
-\### Frontend
-
-
-
-\* React 19
-
-\* Vite
-
-\* React Router
-
-\* Tailwind CSS
-
-\* DaisyUI
-
-\* Zustand
-
-\* Axios
-
-\* Socket.IO Client
-
-\* Lucide React
-
-\* React Hot Toast
-
-\* Emoji Picker React
-
-
-
-\### Backend
-
-
-
-\* Node.js
-
-\* Express.js
-
-\* MongoDB
-
-\* Mongoose
-
-\* Socket.IO
-
-\* JSON Web Token (JWT)
-
-\* bcryptjs
-
-\* Cloudinary
-
-\* Cookie Parser
-
-\* CORS
-
-
-
-\## 🏗️ Project Architecture
-
-
+# 💬 PingNest
+
+### CHAT · CONNECT · NEST
+
+**PingNest** is a full-stack real-time chat application built with the **MERN stack and Socket.IO**. It provides secure authentication, one-to-one real-time messaging, image sharing, online presence, profile management, and customizable themes.
+
+---
+
+## ✨ Features
+
+* 🔐 User signup and login
+* 🔒 JWT-based authentication
+* 🔑 Password hashing with bcryptjs
+* 💬 Real-time one-to-one messaging
+* ⚡ Real-time communication using Socket.IO
+* 🟢 Online user presence indicators
+* 🖼️ Image sharing in conversations
+* 👤 Profile picture upload
+* ☁️ Cloudinary image storage
+* 🎨 Multiple UI themes
+* 📱 Responsive chat interface
+* 🔔 Toast notifications
+* 📋 Recent conversations move to the top
+* 🛡️ Protected API routes
+* 🍪 Cookie-based authentication
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+* React 19
+* Vite
+* React Router
+* Tailwind CSS
+* DaisyUI
+* Zustand
+* Axios
+* Socket.IO Client
+* Lucide React
+* React Hot Toast
+* Emoji Picker React
+
+### Backend
+
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* Socket.IO
+* JSON Web Token (JWT)
+* bcryptjs
+* Cloudinary
+* Cookie Parser
+* CORS
+
+---
+
+## 🏗️ Project Architecture
 
 ```text
-
 PingNest/
-
 │
-
 ├── backend/
-
 │   ├── src/
-
 │   │   ├── controller/
-
 │   │   │   ├── auth.controller.js
-
 │   │   │   └── message.controller.js
-
 │   │   │
-
 │   │   ├── lib/
-
 │   │   │   ├── cloudinary.js
-
 │   │   │   ├── db.js
-
 │   │   │   ├── socket.js
-
 │   │   │   └── utils.js
-
 │   │   │
-
 │   │   ├── middleware/
-
 │   │   │   └── auth.middleware.js
-
 │   │   │
-
 │   │   ├── models/
-
 │   │   │   ├── message.model.js
-
 │   │   │   └── user.model.js
-
 │   │   │
-
 │   │   ├── routes/
-
 │   │   │   ├── auth.route.js
-
 │   │   │   └── message.route.js
-
 │   │   │
-
 │   │   ├── seeds/
-
 │   │   │   └── user.seed.js
-
 │   │   │
-
 │   │   └── index.js
-
 │   │
-
 │   ├── package.json
-
 │   └── package-lock.json
-
 │
-
 ├── frontend/
-
 │   └── vite-project/
-
 │       ├── src/
-
 │       │   ├── component/
-
 │       │   ├── constant/
-
 │       │   ├── lib/
-
 │       │   ├── pages/
-
 │       │   ├── store/
-
 │       │   ├── App.jsx
-
 │       │   ├── App.css
-
 │       │   ├── index.css
-
 │       │   └── main.jsx
-
 │       │
-
 │       ├── public/
-
 │       ├── package.json
-
 │       ├── package-lock.json
-
 │       └── vite.config.js
-
 │
-
 └── README.md
-
 ```
 
+---
 
+## 🔄 How It Works
 
-\## 🔄 How It Works
-
-
-
-The application follows a client-server architecture.
-
-
+PingNest follows a **client-server architecture** where the React frontend communicates with the Express backend through REST APIs, while Socket.IO handles real-time events.
 
 ```text
+                    ┌──────────────────┐
+                    │     React UI     │
+                    │   Vite Frontend  │
+                    └────────┬─────────┘
+                             │
+                       HTTP / Axios
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │  Express Server  │
+                    │    REST APIs     │
+                    └────────┬─────────┘
+                             │
+                    ┌────────┴─────────┐
+                    │                  │
+                    ▼                  ▼
+              ┌───────────┐      ┌────────────┐
+              │  MongoDB  │      │ Cloudinary │
+              │  Database │      │   Images   │
+              └───────────┘      └────────────┘
 
-&#x20;                   ┌──────────────────┐
-
-&#x20;                   │     React UI     │
-
-&#x20;                   │   Vite Frontend  │
-
-&#x20;                   └────────┬─────────┘
-
-&#x20;                            │
-
-&#x20;                      HTTP / Axios
-
-&#x20;                            │
-
-&#x20;                            ▼
-
-&#x20;                   ┌──────────────────┐
-
-&#x20;                   │  Express Server  │
-
-&#x20;                   │    REST APIs     │
-
-&#x20;                   └────────┬─────────┘
-
-&#x20;                            │
-
-&#x20;                   ┌────────┴─────────┐
-
-&#x20;                   │                  │
-
-&#x20;                   ▼                  ▼
-
-&#x20;             ┌───────────┐      ┌───────────┐
-
-&#x20;             │  MongoDB  │      │ Cloudinary│
-
-&#x20;             │  Database │      │   Images  │
-
-&#x20;             └───────────┘      └───────────┘
-
-
-
-&#x20;                    ▲
-
-&#x20;                    │
-
-&#x20;                 Socket.IO
-
-&#x20;                    │
-
-&#x20;                    ▼
-
-
-
-&#x20;             Realtime Messaging
-
+                             ▲
+                             │
+                         Socket.IO
+                             │
+                             ▼
+                    Real-time Messaging
 ```
 
+---
 
+## 🔐 Authentication
 
-\## 🔐 Authentication
+PingNest uses **JWT-based authentication** with HTTP cookies.
 
+### Signup Flow
 
+1. User submits name, email, and password.
+2. Backend validates the request.
+3. Password is securely hashed using `bcryptjs`.
+4. User data is stored in MongoDB.
+5. A JWT is generated.
+6. The JWT is stored in an authentication cookie.
+7. The authenticated user is returned to the frontend.
 
-Authentication is handled using \*\*JWT\*\*.
+### Login Flow
 
+1. User submits email and password.
+2. Backend finds the user by email.
+3. Password is verified using `bcryptjs`.
+4. A JWT is generated.
+5. The authentication cookie is created.
+6. User information is returned to the frontend.
 
+---
 
-\### Signup
+## ⚡ Real-Time Messaging
 
-
-
-When a user creates an account:
-
-
-
-1\. User submits name, email, and password.
-
-2\. Backend validates the input.
-
-3\. Password is hashed using `bcryptjs`.
-
-4\. User information is stored in MongoDB.
-
-5\. A JWT is generated.
-
-6\. The JWT is stored using a cookie.
-
-7\. The authenticated user is returned to the frontend.
-
-
-
-\### Login
-
-
-
-When a user logs in:
-
-
-
-1\. Backend finds the user by email.
-
-2\. Password is verified using bcrypt.
-
-3\. JWT is generated.
-
-4\. Authentication cookie is created.
-
-5\. User information is returned.
-
-
-
-\## ⚡ Realtime Messaging
-
-
-
-The application uses \*\*Socket.IO\*\* for realtime communication.
-
-
+**Socket.IO** is used to provide real-time communication between users.
 
 When a message is sent:
 
-
-
 ```text
-
 User A
-
-&#x20;  │
-
-&#x20;  │ Send message
-
-&#x20;  ▼
-
+   │
+   │ Send message
+   ▼
 Express API
-
-&#x20;  │
-
-&#x20;  ├── Save message → MongoDB
-
-&#x20;  │
-
-&#x20;  └── Socket.IO
-
-&#x20;         │
-
-&#x20;         ▼
-
-&#x20;      User B
-
+   │
+   ├── Save message → MongoDB
+   │
+   └── Socket.IO
+          │
+          ▼
+       User B
 ```
 
+The receiver receives the new message immediately without refreshing the page.
 
+Socket.IO is also used to maintain and broadcast the list of currently online users.
 
-The receiver gets the new message immediately without refreshing the page.
+---
 
-
-
-Socket.IO is also used to track currently online users.
-
-
-
-\## 💬 Messaging Features
-
-
+## 💬 Messaging
 
 The chat system supports:
 
+* Sending text messages
+* Sending images
+* Receiving messages in real time
+* Loading previous conversations
+* Online user indicators
+* Recent conversation ordering
+* Selecting different users
+* Real-time message updates
 
+---
 
-\* Sending text messages
+## 🖼️ Image Uploads
 
-\* Sending images
+PingNest uses **Cloudinary** for image storage instead of storing image files directly in MongoDB.
 
-\* Receiving messages in realtime
+Images are used for:
 
-\* Loading previous conversations
+* Profile pictures
+* Chat images
 
-\* Online user indicators
+Only the resulting Cloudinary URL is stored with the relevant user or message data.
 
-\* Recent conversation ordering
+---
 
-\* Selecting different users
+## 🎨 Theme Support
 
-\* Realtime message updates
+The frontend uses **Tailwind CSS and DaisyUI** for the user interface and theme customization.
 
+**Zustand** is used to manage theme state on the client side.
 
+---
 
-\## 🖼️ Image Uploads
+## 📱 Application Pages
 
+* Login
+* Signup
+* Home / Chat
+* Profile
+* Settings
 
+---
 
-Images are uploaded to \*\*Cloudinary\*\* rather than being stored directly inside MongoDB.
+## ⚙️ Installation
 
+### Prerequisites
 
+Make sure you have the following installed:
 
-This is used for:
+* Node.js
+* npm
+* MongoDB or MongoDB Atlas
+* Cloudinary account
 
-
-
-\* Profile pictures
-
-\* Chat images
-
-
-
-Only the resulting image URL is stored with the user/message data.
-
-
-
-\## 🎨 Theme Support
-
-
-
-The frontend uses \*\*Tailwind CSS and DaisyUI\*\* to provide theme customization.
-
-
-
-Theme state is managed using \*\*Zustand\*\*.
-
-
-
-\## 📱 Pages
-
-
-
-The application currently contains:
-
-
-
-\* Login
-
-\* Signup
-
-\* Home / Chat
-
-\* Profile
-
-\* Settings
-
-
-
-\## ⚙️ Installation
-
-
-
-\### Prerequisites
-
-
-
-Make sure you have installed:
-
-
-
-\* Node.js
-
-\* npm
-
-\* MongoDB or MongoDB Atlas
-
-\* Cloudinary account
-
-
-
-\### 1. Clone the repository
-
-
+### 1. Clone the Repository
 
 ```bash
-
-git clone YOUR\_GITHUB\_REPOSITORY\_URL
-
+git clone YOUR_GITHUB_REPOSITORY_URL
 cd PingNest
-
 ```
 
-
-
-\### 2. Install backend dependencies
-
-
+### 2. Install Backend Dependencies
 
 ```bash
-
 cd backend
-
 npm install
-
 ```
 
-
-
-\### 3. Install frontend dependencies
-
-
+### 3. Install Frontend Dependencies
 
 ```bash
-
 cd ../frontend/vite-project
-
 npm install
-
 ```
 
+---
 
+## 🔑 Environment Variables
 
-\## 🔑 Environment Variables
-
-
-
-Create a `.env` file inside the `backend` folder.
-
-
+Create a `.env` file inside the `backend` directory:
 
 ```env
-
 PORT=5001
 
+MONGODB_URI=your_mongodb_connection_string
 
+JWT_SECRET=your_jwt_secret
 
-MONGODB\_URI=your\_mongodb\_connection\_string
-
-
-
-JWT\_SECRET=your\_jwt\_secret
-
-
-
-CLOUDINARY\_CLOUD\_NAME=your\_cloudinary\_cloud\_name
-
-CLOUDINARY\_API\_KEY=your\_cloudinary\_api\_key
-
-CLOUDINARY\_API\_SECRET=your\_cloudinary\_api\_secret
-
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 ```
 
-
-
-> \*\*Important:\*\* Never upload `.env` files containing real credentials to GitHub.
-
-
-
-Add the following to `.gitignore`:
-
-
+Recommended `.gitignore` entries:
 
 ```gitignore
-
-node\_modules/
+node_modules/
 
 .env
-
 .env.local
-
-.env.\*.local
+.env.*.local
 
 dist/
-
 ```
 
+---
 
+## ▶️ Running the Application
 
-\## ▶️ Running the Application
-
-
-
-\### Start Backend
-
-
+### Start the Backend
 
 From the `backend` directory:
 
-
-
 ```bash
-
 npm run dev
-
 ```
 
-
-
-The backend runs on:
-
-
+Backend:
 
 ```text
-
 http://localhost:5001
-
 ```
 
-
-
-\### Start Frontend
-
-
+### Start the Frontend
 
 Open another terminal:
 
-
-
 ```bash
-
 cd frontend/vite-project
-
 npm run dev
-
 ```
 
-
-
-The frontend runs on:
-
-
+Frontend:
 
 ```text
-
 http://localhost:5173
-
 ```
 
+---
 
-
-
-
-\## 🧠 Key Concepts Demonstrated
-
-
+## 🧠 Key Concepts Demonstrated
 
 This project demonstrates practical experience with:
 
+* Full-stack web development
+* REST API development
+* Authentication and authorization
+* JWT and cookie-based authentication
+* Password hashing
+* MongoDB database operations
+* Mongoose models
+* Real-time communication
+* Socket.IO
+* React state management
+* Zustand
+* Protected API routes
+* Cloudinary integration
+* Image uploads
+* Responsive UI development
+* Frontend/backend integration
+* Error handling
 
+---
 
-\* Full-stack web development
+## 🔮 Future Improvements
 
-\* REST API development
+Potential future improvements include:
 
-\* Authentication and authorization
+* Group chats
+* Message reactions
+* Message editing and deletion
+* Read receipts
+* Push notifications
+* Voice and video calls
+* Message search
+* File sharing
+* Message notifications
+* Production deployment
 
-\* JWT and cookies
+---
 
-\* Password hashing
+## 👨‍💻 Author
 
-\* MongoDB database operations
+**Vedant Kadia**
 
-\* Mongoose models
+---
 
-\* Realtime communication
-
-\* Socket.IO
-
-\* React state management
-
-\* Zustand
-
-\* Protected routes
-
-\* Cloudinary integration
-
-\* Image uploads
-
-\* Responsive UI development
-
-\* Frontend/backend integration
-
-\* Error handling
-
-
-
-\## 🔮 Future Improvements
-
-
-
-Possible future improvements include:
-
-
-
-\* Group chats
-
-\* Message reactions
-
-\* Message editing and deletion
-
-\* Read receipts
-
-\* Push notifications
-
-\* Voice and video calls
-
-\* Message search
-
-\* File sharing
-
-\* Message notifications
-
-\* Production deployment
-
-
-
-\## 👨‍💻 Author
-
-
-
-\*\*Vedant Kadia\*\*
-
-
-
-
-
-\## 📄
-
+⭐ If you found PingNest interesting, consider giving the repository a star
