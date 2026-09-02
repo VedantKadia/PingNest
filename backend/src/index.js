@@ -24,7 +24,9 @@ app.use(
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
-
+app.get("/", (req, res) => {
+  res.send("PingNest Backend is running!");
+});
 server.listen(PORT, () => {
   console.log("server is running on PORT:" + PORT);
   connectDB();
